@@ -14,6 +14,6 @@ ffmpeg -f concat -i list.txt -c copy loop.mp4
 
 ffmpeg -sseof -1800 -i loop.mp4 -c copy loop30min.mp4
 
-bash ~/Documents/CCCNC/countdown-timer-from-video.sh loop30min.mp4
+bash countdown-timer-from-video.sh loop30min.mp4
 
 rm announcements.mp4 list.txt loop.mp4 loop30min.mp4
