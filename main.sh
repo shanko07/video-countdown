@@ -1,4 +1,8 @@
 #!/bin/bash
 
-bash make-vid-with-countdown.sh
-ffmpeg -i 1800-countdown-timer.mp4 -i looped_audio.mp3 -shortest -af 'afade=out:st=1798:d=2' -c:v libx264 -crf 28 -preset ultrafast fade_vid.mp4
+# ${1} is the number of seconds
+#seconds = ${1}
+seconds=1800
+
+bash make-vid-with-countdown.sh ${seconds}
+ffmpeg -i ${seconds}-countdown-timer.mp4 -i looped_audio.mp3 -shortest -af "afade=out:st=$(($seconds-2)):d=2" -c:v libx264 -crf 28 -preset ultrafast fade_vid.mp4
