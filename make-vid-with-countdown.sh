@@ -7,8 +7,10 @@ rm list.txt
 
 thingy=`ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 announcements.mp4`
 
-duration=`echo ${thingy} | awk '{print ($0-int($0)>0)?int($0)+1:int($0)}'`
+# round down the clip_length here, so that we plan to make the loop more times than we need
+duration=`echo ${thingy} | awk '{print int($0)}'`
 
+# make the loop (final_length+clip_length-1)/clip_length which will be at least as long as needed since clip_length is underreported
 for i in $(seq 1 $((($1+$duration-1)/$duration)));
 do
     echo "file 'announcements.mp4'" >> list.txt;
